@@ -17,4 +17,11 @@ public class Subtracter
     System.out.println("Inside Minuser..... ");
     return Value1-Value2;
   }
+  
+  public int minusScientific()
+  {
+	  System.out.println("Inside Scientific Minus");
+	  return Math.subtractExact(Value1, Value2);
+  }
+  
 }
