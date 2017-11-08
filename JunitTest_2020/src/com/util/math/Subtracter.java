@@ -14,7 +14,7 @@ public class Subtracter
   
   public int minuser()
   {
-    System.out.println("Inside Minuser..... 23232323232323 sds ds ssd ");
+    System.out.println("Inside Minuser.....  ");
     return Value1-Value2;
   }
   
