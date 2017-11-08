@@ -1,14 +1,17 @@
 package com.test.util;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import com.util.math.Adder;
+
+import junit.framework.Assert;
 
 public class TestAdder {
 
 	@Test
 	public void testAddValues() {
-		fail("Not yet implemented");
+		Adder obj=new Adder(5,100);
+		Assert.assertEquals(5+100, obj.addValues());
 	}
 
 }

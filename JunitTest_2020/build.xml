@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="JunitTest_2020" default="dist" basedir=".">
+<project name="JunitTest_2020" default="junit" basedir=".">
   <description>
     Ant Build File for JunitTest
   </description>
@@ -11,10 +11,11 @@
   <property name="dist" location="dist"/>
   <property name="lib" location="lib"/>
   
-  <classpath>
-      <pathelement path="${lib}"/>
-      <pathelement location="lib/junit-4.11.jar"/>
-    </classpath>
+    <path id="build-classpath">
+		<fileset dir="${lib}">
+	    	<include name="*.jar"/>
+		</fileset>
+    </path> 
 
 
   <target name="init">
@@ -26,17 +27,19 @@
 
   <target name="compile" depends="init"
         description="compile the source">
+   
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac srcdir="${src}" destdir="${build}"/>
+    <javac srcdir="${src}" destdir="${build}" classpathref="build-classpath"/>
+    <javac srcdir="test" destdir="${build}" classpathref="build-classpath"/>
   </target>
 
-  <target name="dist" depends="compile"
+  <target name="dist" 
         description="generate the distribution">
     <!-- Create the distribution directory -->
     <mkdir dir="${dist}/lib"/>
 
     <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/lib/JunitTest-${DSTAMP}.jar" basedir="${build}"/>
+    <jar jarfile="${dist}/lib/JunitTest_2020-${DSTAMP}.jar" basedir="${build}"/>
   </target>
 
   <target name="clean"
@@ -45,4 +48,22 @@
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
   </target>
+  
+  <target name="junit" depends="compile,dist" description="fire UnitTest">
+  <echo >${dist}/lib/JunitTest_2020-${DSTAMP}.jar</echo>
+  <junit printsummary="yes" haltonfailure="yes" >
+  	
+  	<CLASSPATH>
+      <pathelement path="${lib}" />
+      <pathelement location="lib/junit-4.11.jar"/>
+  		<pathelement location="lib/hamcrest-core-1.3.jar"/>
+  		<pathelement location="${dist}/lib/JunitTest_2020-${DSTAMP}.jar"/>
+    </CLASSPATH> 
+  
+  	<test name="com.test.util.TestAdder" outfile="result">
+  		<formatter type="xml"/>	
+  	</test>
+  </junit>
+  </target>
+  
 </project>
