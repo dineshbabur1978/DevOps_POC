@@ -17,7 +17,7 @@ public class Adder {
 	 */
 	public int addValues()
 	{
-		System.out.println("Inside AddValues Method - Made  Chandffdfges22sdssdsd22df d dfdfd df333fdfdf d333  ");
+		System.out.println("Inside AddValues Method  ");
 		return Value1+Value2;
 	}
 	
